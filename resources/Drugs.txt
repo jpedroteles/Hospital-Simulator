@@ -3,48 +3,48 @@
     {
       "name": "Aspirin",
       "short": "As",
-      "cures": "Fever",
+      "cures": "F",
       "sideEffects": [
         {
-          "drug": "Paracetamol",
+          "drug": "P",
           "previous": "",
-          "new": "Death"
+          "new": "X"
         }
       ]
     },
     {
       "name": "Insulin",
       "short": "I",
-      "cures": "Diabetes",
+      "cures": "D",
       "sideEffects": [
         {
-          "drug": "Antibiotic",
-          "previous": "Healthy",
-          "new": "Fever"
+          "drug": "An",
+          "previous": "H",
+          "new": "F"
         }
       ]
     },
     {
       "name": "Antibiotic",
       "short": "An",
-      "cures": "Tuberculosis",
+      "cures": "T",
       "sideEffects": [
         {
-          "drug": "Insulin",
-          "previous": "Healthy",
-          "new": "Fever"
+          "drug": "I",
+          "previous": "H",
+          "new": "F"
         }
       ]
     },
     {
       "name": "Paracetamol",
-      "short": "PC",
-      "cures": "Fever",
+      "short": "P",
+      "cures": "F",
       "sideEffects": [
         {
-          "drug": "Aspirin",
+          "drug": "As",
           "previous": "",
-          "new": "Death"
+          "new": "X"
         }
       ]
     }
