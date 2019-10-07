@@ -1,17 +1,29 @@
 package hospital;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
+import org.json.*;
 
 public class Utils {
 
 	private static Map<String,Integer> statesCounter = new HashMap<>();
+	public static Drugs[] drugsInfo;
 
+	/**
+	 * Create final report with the final patient states
+	 * 
+	 * @param patients
+	 * @param availableDrugs
+	 * @return statesCounter 
+	 */
 	public static Map<String, Integer> createReport(Patient[] patients, String[] availableDrugs) {
 		mapStatusCounter();
 
@@ -31,7 +43,6 @@ public class Utils {
 
 	}
 
-
 	public static void mapStatusCounter() {
 		statesCounter.put("F", 0);
 		statesCounter.put("H", 0);
@@ -42,8 +53,11 @@ public class Utils {
 
 
 
-	/* One time in a million the Flying Flying Spaghetti Monster shows his noodly power
-	 and resurrects a dead patient (Dead becomes Healthy).*/
+	/**
+	 * One time in a million the Flying Flying Spaghetti Monster shows his noodly power
+	 and resurrects a dead patient (Dead becomes Healthy).
+	 * @param patient
+	 */
 	private static void spaghettiMonster(Patient patient) {
 		double prob = Math.random();
 		if(prob <= 0.000001) {
@@ -51,6 +65,60 @@ public class Utils {
 		}		
 	}
 
+	/**
+	 * 
+	 */
+	public static Drugs[] loadDrugsInfo() {
+		String jsonData = readFile("C:/Users/Pedro Teles/eclipse-workspace/Simulator/resources/Drugs.txt");
+		JSONObject jobj = new JSONObject(jsonData);
+		JSONArray jarr = new JSONArray(jobj.getJSONArray("Drugs").toString());
+		ArrayList<String> sideEffects = new ArrayList<String>();
+		drugsInfo = new Drugs[jarr.length()];
+
+		for(int i =0; i < jarr.length(); i++) {	           
+			String name = jarr.getJSONObject(i).getString("name");
+			String id = jarr.getJSONObject(i).getString("short");
+			String cures = jarr.getJSONObject(i).getString("cures");
+			String drug, previous,newStatus;
+
+			JSONArray sideEffectsArr = new JSONArray(jarr.getJSONObject(i).getJSONArray("sideEffects").toString());
+			for (int y = 0; y <sideEffectsArr.length();y++) {
+				drug = new String(sideEffectsArr.getJSONObject(y).getString("drug"));
+				previous = new String(sideEffectsArr.getJSONObject(y).getString("previous"));
+				newStatus = new String(sideEffectsArr.getJSONObject(y).getString("new"));
+				sideEffects.add(drug);
+				sideEffects.add(previous);
+				sideEffects.add(newStatus);
+
+			}
+			drugsInfo[i] = new Drugs(name,id,cures,sideEffects);
+		}
+		return drugsInfo;
+	}
+
+
+	/**
+	 * Reads content of file
+	 * @param string
+	 * @return content of file
+	 */
+	private static String readFile(String string) {
+		String result = "";
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(string));
+			StringBuilder sb = new StringBuilder();
+			String line = br.readLine();
+			while (line != null) {
+				sb.append(line);
+				line = br.readLine();
+			}
+			result = sb.toString();
+			br.close();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 
 }

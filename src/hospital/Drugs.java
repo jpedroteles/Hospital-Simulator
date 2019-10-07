@@ -1,23 +1,29 @@
 package hospital;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 public class Drugs {
 	private String name;
 	private String abrev;
 	private String cures;
-	private Map<String,String> sideEffects;
+	private ArrayList<String> sideEffects;
 	
-	public Drugs(String name, String abrev, String cures, Map<String, String> sideEffects){
+	/**
+	 * @param name
+	 * @param abrev
+	 * @param cures
+	 * @param sideEffects2
+	 */
+	public Drugs(String name, String abrev, String cures, ArrayList<String> sideEffects2){
 		this.setName(name);
 		this.setAbrev(abrev);
 		this.setCures(cures);
-		this.setSideEffects(sideEffects);
+		this.setSideEffects(sideEffects2);
 	}
 
-
 	/**
-	 * @return the name
+	 * @return name
 	 */
 	public String getName() {
 		return name;
@@ -57,15 +63,15 @@ public class Drugs {
 	/**
 	 * @return the sideEffects
 	 */
-	public Map<String,String> getSideEffects() {
+	public ArrayList<String> getSideEffects() {
 		return sideEffects;
 	}
 
 	/**
-	 * @param sideEffects the sideEffects to set
+	 * @param sideEffects2 the sideEffects to set
 	 */
-	public void setSideEffects(Map<String,String> sideEffects) {
-		this.sideEffects = sideEffects;
+	public void setSideEffects(ArrayList<String> sideEffects2) {
+		this.sideEffects = sideEffects2;
 	}	
 
 

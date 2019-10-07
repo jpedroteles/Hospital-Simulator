@@ -3,7 +3,6 @@ package hospital;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.json.JSONObject;
 
 public class Main {
 
@@ -11,6 +10,8 @@ public class Main {
 		Hospital hospital = new Hospital();
 		Map<String, Integer> report = new HashMap<>();
 		
+		
+		Utils.loadDrugsInfo();
 		
 		if(args[0] != null) {
 			//create patients objects
@@ -24,7 +25,7 @@ public class Main {
 			//Final report
 			report = Utils.createReport(hospital.getPatients(), hospital.getAvailableDrugs());
 		}
-		System.out.println(report);
+		//System.out.println(report);
 	}
 
 	
