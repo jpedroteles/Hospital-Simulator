@@ -1,13 +1,9 @@
 package hospital;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.json.*;
@@ -69,10 +65,9 @@ public class Utils {
 	 * 
 	 */
 	public static Drugs[] loadDrugsInfo() {
-		String jsonData = readFile("C:/Users/Pedro Teles/eclipse-workspace/Simulator/resources/Drugs.txt");
+		String jsonData = readFile("D:/User/Documents/GitHub/Hospital-Simulator/Hospital-simulator/hospital-simulator/resources/Drugs.txt");
 		JSONObject jobj = new JSONObject(jsonData);
 		JSONArray jarr = new JSONArray(jobj.getJSONArray("Drugs").toString());
-		ArrayList<String> sideEffects = new ArrayList<String>();
 		drugsInfo = new Drugs[jarr.length()];
 
 		for(int i =0; i < jarr.length(); i++) {	           
@@ -82,16 +77,18 @@ public class Utils {
 			String drug, previous,newStatus;
 
 			JSONArray sideEffectsArr = new JSONArray(jarr.getJSONObject(i).getJSONArray("sideEffects").toString());
-			for (int y = 0; y <sideEffectsArr.length();y++) {
+			for (int y = 0; y <sideEffectsArr.length(); y ++) {
 				drug = new String(sideEffectsArr.getJSONObject(y).getString("drug"));
 				previous = new String(sideEffectsArr.getJSONObject(y).getString("previous"));
 				newStatus = new String(sideEffectsArr.getJSONObject(y).getString("new"));
-				sideEffects.add(drug);
-				sideEffects.add(previous);
-				sideEffects.add(newStatus);
-
-			}
-			drugsInfo[i] = new Drugs(name,id,cures,sideEffects);
+				ArrayList<String> sideEffectsTemp = new ArrayList<String>();
+				sideEffectsTemp.add(drug);
+				sideEffectsTemp.add(previous);
+				sideEffectsTemp.add(newStatus);
+				Drugs drug1 = new Drugs(name,id,cures,sideEffectsTemp);
+				drugsInfo[i] = drug1;
+				break;
+			}			
 		}
 		return drugsInfo;
 	}

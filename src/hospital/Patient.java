@@ -65,38 +65,22 @@ public class Patient {
 
 		for(int i = 0; i <drugs.length; i ++) {
 			for(int y = 0; y <drugsInfo.length; y++) {
-				if(drugs[i] == drugsInfo[y].getSideEffects().get(0).toString()) {
-					if(drugsInfo[y].getSideEffects().get(1).toString() == null) {
-						state = drugsInfo[y].getSideEffects().get(2);
+				if(drugs[i].toString().equals(drugsInfo[y].getSideEffects().get(0).toString())) {
+					if(state.equals(drugsInfo[y].getSideEffects().get(1))) {
+						state = drugsInfo[y].getSideEffects().get(2).toString();
 					}
-					else if (drugsInfo[y].getSideEffects().get(1).toString() == state) {
-						state = drugsInfo[y].getSideEffects().get(2);	
-					}
-					else {
-						continue;
+					else  {
+						state = drugsInfo[y].getSideEffects().get(2).toString();
 					}
 				}
-				else if (drugsInfo[y].getSideEffects().get(1).toString() == state && drugs[i] == drugsInfo[y].getSideEffects().get(0).toString()) {
-					state = drugsInfo[y].getSideEffects().get(2);
+				else if (drugs[i].toString().equals(drugsInfo[y].getAbrev()) && state.equals(drugsInfo[y].getCures())) {
+					state = "H";
 				}
 				else {
-					continue;
+					killDiabetes();
 				}
 			}
-		}		
-		/*
-		List<String> drugsList = new ArrayList<String>();
-		drugsList = Arrays.asList(drugs);
-		if(drugsList.contains("As") && drugsList.contains("P")) {
-			state = "X";
 		}
-		else if(state.equals("D") && !drugsList.contains("I")) {
-			state = "X";
-		}
-		else if(state.equals("H") &&  drugsList.contains("I") && drugsList.contains("An")){
-			state="F";
-		}	*/
-
 	}
 
 	/**

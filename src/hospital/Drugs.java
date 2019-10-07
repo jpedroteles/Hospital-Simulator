@@ -1,7 +1,6 @@
 package hospital;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public class Drugs {
 	private String name;
@@ -15,11 +14,11 @@ public class Drugs {
 	 * @param cures
 	 * @param sideEffects2
 	 */
-	public Drugs(String name, String abrev, String cures, ArrayList<String> sideEffects2){
-		this.setName(name);
-		this.setAbrev(abrev);
-		this.setCures(cures);
-		this.setSideEffects(sideEffects2);
+	public Drugs(String name, String abrev, String cures, ArrayList<String> sideEffects){
+		this.name=name;
+		this.abrev=abrev;
+		this.cures=cures;
+		this.sideEffects=sideEffects;
 	}
 
 	/**
